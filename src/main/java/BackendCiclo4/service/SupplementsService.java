@@ -76,6 +76,12 @@ public class SupplementsService {
         }).orElse(false);
         return aBoolean;
     }
-    
-    
+
+    public List<Supplements> getByPrice(double price){
+        return clotheRepository.getByPrice(price);
+    }
+
+    public List<Supplements> getByDescriptionContains(String description){
+        return clotheRepository.getByDescriptionContains(description);
+    }
 }

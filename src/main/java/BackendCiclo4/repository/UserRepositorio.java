@@ -35,7 +35,6 @@ public class UserRepositorio {
 
     public boolean emailExists(String email) {
         Optional<User> usuario = userCrudRepository.findByEmail(email);
-        
         return !usuario.isEmpty();
     }
     
@@ -46,5 +45,9 @@ public class UserRepositorio {
     public Optional<User> lastUserId(){
         return userCrudRepository.findTopByOrderByIdDesc();
     }
-     
+
+    public List<User> getByMonthBirthDay(String month){
+        return userCrudRepository.findByMonthBirthtDay(month);
+    }
+
 }

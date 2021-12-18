@@ -62,10 +62,10 @@ public class OrderRepositorio {
 
     }
 
-    public List<Order> ordersSalesManByState(String state, Integer id) {
+    public List<Order> ordersSalesManByState(String status, Integer id) {
         Query query = new Query();
         Criteria criterio = Criteria.where("salesMan.id").is(id)
-                .and("status").is(state);
+                .and("status").is(status);
 
         query.addCriteria(criterio);
 

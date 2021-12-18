@@ -48,7 +48,6 @@ public class OrderService {
     }
 
     public Order update(Order order) {
-
         if (order.getId() != null) {
             Optional<Order> orderDb = orderRepository.getOrder(order.getId());
             if (!orderDb.isEmpty()) {
@@ -81,11 +80,12 @@ public class OrderService {
         return orderRepository.ordersSalesManByID(id);
     }
 
-    public List<Order> ordersSalesManByState(String state, Integer id){
-        return orderRepository.ordersSalesManByState(state, id);
+    public List<Order> ordersSalesManByState(String status, Integer id){
+        return orderRepository.ordersSalesManByState(status, id);
     }
 
     public List<Order> ordersSalesManByDate(String dateStr, Integer id) {
         return orderRepository.ordersSalesManByDate(dateStr,id);
     }
+
 }

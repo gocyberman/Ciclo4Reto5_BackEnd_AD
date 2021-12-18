@@ -51,6 +51,15 @@ public class SupplementsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("reference") String reference) {
         return accessoryService.delete(reference);
-    } 
-    
+    }
+
+    @GetMapping("/price/{price}")
+    public List<Supplements> getByPrice(@PathVariable("price") double price){
+        return accessoryService.getByPrice(price);
+    }
+
+    @GetMapping("/description/{description}")
+    public List<Supplements> getByDescriptionContains(@PathVariable("description") String description){
+        return accessoryService.getByDescriptionContains(description);
+    }
 }

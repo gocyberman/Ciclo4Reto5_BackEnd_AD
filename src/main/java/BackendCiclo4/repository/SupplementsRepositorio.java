@@ -20,6 +20,7 @@ public class SupplementsRepositorio {
     public Optional<Supplements> getClothe(String reference) {
         return repository.findById(reference);
     }
+
     public Supplements create(Supplements clothe) {
         return repository.save(clothe);
     }
@@ -30,5 +31,13 @@ public class SupplementsRepositorio {
     
     public void delete(Supplements clothe) {
         repository.delete(clothe);
+    }
+
+    public List<Supplements> getByPrice(double price){
+        return repository.findByPrice(price);
+    }
+
+    public List<Supplements> getByDescriptionContains(String description){
+        return repository.findByDescriptionContainingIgnoreCase(description);
     }
 }

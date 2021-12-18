@@ -8,20 +8,34 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Class User Service
+ */
 @Service
 public class UserService {
      @Autowired
     private UserRepositorio userRepository;
 
+    /**
+     * Get = List of All Users
+     * @return
+     */
     public List<User> getAll() {
         return userRepository.getAll();
     }
 
-    public Optional<User> getUser(int id) {
-        
-        return userRepository.getUser(id);
-    }
+    /**
+     * Get = User by its id
+     * @param id
+     * @return
+     */
+    public Optional<User> getUser(int id) { return userRepository.getUser(id); }
 
+    /**
+     * This method saves a new user
+     * @param user
+     * @return
+     */
     public User create(User user) {
         if (user.getId() == null) {
             return user;            
@@ -39,6 +53,11 @@ public class UserService {
         }
     }
 
+    /**
+     * This method updates a user
+     * @param user
+     * @return
+     */
     public User update(User user) {
 
         if (user.getId() != null) {
@@ -50,6 +69,15 @@ public class UserService {
                 if (user.getName() != null) {
                     userDb.get().setName(user.getName());
                 }
+
+                if (user.getBirthtDay() != null){
+                    userDb.get().setBirthtDay(user.getBirthtDay());
+                }
+
+                if (user.getMonthBirthtDay() != null){
+                    userDb.get().setMonthBirthtDay(user.getMonthBirthtDay());
+                }
+
                 if (user.getAddress() != null) {
                     userDb.get().setAddress(user.getAddress());
                 }
@@ -65,6 +93,10 @@ public class UserService {
                 if (user.getZone() != null) {
                     userDb.get().setZone(user.getZone());
                 }
+
+                if (user.getType() != null) {
+                    userDb.get().setType(user.getType());
+                }
                 
                 userRepository.update(userDb.get());
                 return userDb.get();
@@ -75,7 +107,12 @@ public class UserService {
             return user;
         }
     }
-    
+
+    /**
+     * This method deletes a User
+     * @param userId
+     * @return
+     */
     public boolean delete(int userId) {
         Boolean aBoolean = getUser(userId).map(user -> {
             userRepository.delete(user);
@@ -83,11 +120,22 @@ public class UserService {
         }).orElse(false);
         return aBoolean;
     }
-    
+
+    /**
+     * This method checks if an email exists
+     * @param email
+     * @return
+     */
     public boolean emailExists(String email) {
         return userRepository.emailExists(email);
     }
 
+    /**
+     * This method verifies if a user is registered by its email and password
+     * @param email
+     * @param password
+     * @return
+     */
     public User authenticateUser(String email, String password) {
         Optional<User> usuario = userRepository.authenticateUser(email, password);
 
@@ -97,5 +145,8 @@ public class UserService {
             return usuario.get();
         }
     }
-    
+
+    public List<User> getByMonthBirthDay(String month){
+        return userRepository.getByMonthBirthDay(month);
+    }
 }
